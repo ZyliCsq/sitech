@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: data-life-cycle
+
+  #配置数据源----------------------start
+  datasource:
+    name: mysql-dev
+    url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&verifyServerCertificate=false&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: root
+
+    driver-class-name: com.mysql.jdbc.Driver
+
+#配置日志-------------------------start
+
+logging:
+  level:
+    org.springframework: WARN
+    com.sitech: DEBUG
+#配置日志-------------------------end
+
+
+#配置jasypt ----------------------start
+
+jasypt:
+  encryptor:
+    password: billing-wangyue
+
+#配置jasypt ----------------------end
+
+server:
+  port: 18082
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+allow:
+  filter:
+    host: 127.0.0.1,127.0.0.2
+    enable: false

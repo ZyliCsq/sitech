@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>data-governance</artifactId>
+		<groupId>com.sitech.lifecycle</groupId>
+		<version>1.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>lifecycle</artifactId>
+	<version>0.0.1</version>
+	<description>数据生命周期管理</description>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+		        <exclusion>
+		            <groupId>org.apache.logging.log4j</groupId>
+		            <artifactId>log4j-api</artifactId>
+		        </exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.16.0</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.bes.appserver</groupId> -->
+		<!-- <artifactId>bes-lite-spring-boot-2.x-starter</artifactId> -->
+		<!-- </dependency> -->
+        
+        <!--
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+		</dependency>
+		-->
+		
+		<dependency>
+		    <groupId>commons-lang</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.github.ulisesbocchio</groupId>
+		  <artifactId>jasypt-spring-boot-starter</artifactId>
+		  <version>2.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.sitech.dmdb</groupId> -->
+		<!-- <artifactId>dmdbjdbc</artifactId> -->
+		<!-- <version>8.0.3.0</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.oracle</groupId> -->
+		<!-- <artifactId>ojdbc8</artifactId> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>orai18n</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+		</dependency>
+
+		<!--<dependency> <groupId>com.sitech.framework.athena</groupId> <artifactId>athena-client</artifactId> 
+			</dependency> -->
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<!--生成的jar中，不包含pom.xml和pom.properties -->
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<manifest>
+							<!--是否要把第三方jar放到manifest的classpath中 -->
+							<addClasspath>true</addClasspath>
+							<!--生成的manifest中classpath的前缀，要把第三方jar放到lib下，所以classpath的前缀是lib/ -->
+							<classpathPrefix>lib/</classpathPrefix>
+
+							<!--应用的main class -->
+							<mainClass>com.sitech.DataLifeApplication</mainClass>
+						</manifest>
+						<manifestEntries>
+                           <!-- 将config也设置为classpath路径可访问的地方	 -->
+                           <Class-Path>config/.</Class-Path>
+                       </manifestEntries>
+					</archive>
+
+					<!--过滤掉不希望包含在jar中的文件 -->
+					<excludes>
+						<!-- 排除掉application.yml，配置文件外置 -->
+						<exclude>/config/application*</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
